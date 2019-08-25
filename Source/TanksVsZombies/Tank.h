@@ -26,7 +26,17 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
+private:
     // Helpful debug tool -which way is the tank facing
-    UPROPERTY()
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Tank", meta = (AllowPrivateAccess="true"))
     class UArrowComponent* TankDirection;
+
+    // Sprite for the tank body
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Tank", meta = (AllowPrivateAccess = "true"))
+    class UPaperSpriteComponent* TankSprite;
+    
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Tank", meta = (AllowPrivateAccess = "true"))
+    UChildActorComponent* ChildTurret;
+
+    //class UPaperSpriteComponent* Tank
 };
