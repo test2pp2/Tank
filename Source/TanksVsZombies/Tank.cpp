@@ -5,6 +5,7 @@
 #include "Components/ArrowComponent.h"
 #include "PaperSpriteComponent.h"
 #include "Turret.h"
+#include "Camera/CameraComponent.h"
 
 // Sets default values
 ATank::ATank()
@@ -18,19 +19,21 @@ ATank::ATank()
     }
 
     TankDirection = CreateDefaultSubobject<UArrowComponent>(TEXT("TankDirection"));
-    if (!TankDirection->AttachTo(RootComponent))
+    if (!TankDirection->AttachToComponent(RootComponent, FAttachmentTransformRules::KeepRelativeTransform))
     {
         return;
     }
 
     TankSprite = CreateDefaultSubobject<UPaperSpriteComponent>(TEXT("TankSprite"));
-    if (!TankSprite->AttachTo(TankDirection))
+    if (!TankSprite->AttachToComponent(TankDirection, FAttachmentTransformRules::KeepRelativeTransform))
     {
         return;
     }
 
-    ChildTurret = CreateDefaultSubobject<UChildActorComponent>(TEXT("AA"));
-    ChildTurret->AttachTo(TankDirection);
+    UCameraComponent* Cameracomponent = nullptr;
+
+    ChildTurret = CreateDefaultSubobject<UChildActorComponent>(TEXT("Turret"));
+    ChildTurret->AttachToComponent(TankDirection, FAttachmentTransformRules::KeepRelativeTransform);
 }
 
 // Called when the game starts or when spawned

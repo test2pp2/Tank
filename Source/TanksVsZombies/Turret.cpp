@@ -12,10 +12,10 @@ ATurret::ATurret()
 	PrimaryActorTick.bCanEverTick = true;
 
     TurretDirection = CreateDefaultSubobject<UArrowComponent>("TurretDirection");
-    TurretDirection->AttachTo(RootComponent);
+    TurretDirection->AttachToComponent(RootComponent, FAttachmentTransformRules::KeepRelativeTransform);
 
     TurretSprite = CreateDefaultSubobject<UPaperSpriteComponent>(TEXT("TankSprite"));
-    if (!TurretSprite->AttachTo(TurretDirection))
+    if (!TurretSprite->AttachToComponent(TurretDirection, FAttachmentTransformRules::KeepRelativeTransform))
     {
         return;
     }
